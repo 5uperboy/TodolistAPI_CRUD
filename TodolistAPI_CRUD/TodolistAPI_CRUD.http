@@ -1,0 +1,10 @@
+@TodolistAPI_CRUD_HostAddress = https://localhost:7085
+
+GET {{TodolistAPI_CRUD_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+GET {{TodolistAPI_CRUD_HostAddress}}/api/todoitems
+
+###
