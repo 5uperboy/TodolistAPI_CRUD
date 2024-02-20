@@ -15,6 +15,7 @@ namespace TodolistAPI_CRUD.Data
         }
 
         public DbSet<TodolistAPI_CRUD.Models.TodoItem> TodoItem { get; set; } = default!;
+        public DbSet<TodolistAPI_CRUD.Models.Users> Users { get; set; } = default!;
         public override int SaveChanges()
         {
             var entries = ChangeTracker.Entries()
@@ -23,7 +24,9 @@ namespace TodolistAPI_CRUD.Data
             foreach (var entityEntry in entries)
             {
                 var todoItem = (TodoItem)entityEntry.Entity;
-                todoItem.DateModified = DateTime.Now;
+                TimeZoneInfo manilaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Manila");
+                DateTime manilaTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, manilaTimeZone);
+                todoItem.DateModified = manilaTime;
             }
 
             return base.SaveChanges();
